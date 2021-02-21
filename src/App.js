@@ -6,6 +6,9 @@ import CookieList from "./components/ProductList";
 import Home from "./components/Home";
 import { ThemeProvider } from "styled-components";
 
+// States
+import React, { useState } from "react";
+
 const theme = {
   light: {
     mainColor: "#242424", // main font color
@@ -22,12 +25,15 @@ const theme = {
 };
 
 function App() {
+  // State contraption
+  const [currentTheme, setCurrentTheme] = useState("light");
+
+  const toggleTheme = () =>
+    setCurrentTheme(currentTheme === "light" ? "dark" : "light");
   return (
-    <ThemeProvider theme={theme.light}>
+    <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <ThemeButton onClick={() => alert("I do nothing..")}>
-        Dark Theme
-      </ThemeButton>
+      <ThemeButton onClick={toggleTheme}>Dark Theme</ThemeButton>
       <Home />
       <CookieList />
     </ThemeProvider>
